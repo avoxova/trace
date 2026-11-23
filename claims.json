@@ -1,0 +1,383 @@
+{
+  "case": "USDT-BEP20-1405",
+  "site": "https://trace.avoxova.com",
+  "note": "Every claim below is a statement about public blockchain data. Inclusion of an address is not an accusation against its holder. Exchanges, custodians and bridges are listed only as destinations or infrastructure.",
+  "tokens": {
+    "usdt_bsc": "0x55d398326f99059fF775485246999027B3197955"
+  },
+  "contracts": {
+    "sale": "0xBe03104753e158e414775D5f183E9B92601A0d28",
+    "token": "0xdb0E2537c2276699E4B716cEF3acA50Ef882dCDF",
+    "deposit_implementation": "0x5ebf6be31463c8d49e5253fb3deaa17fe229c69d",
+    "near_intents_bridge": "0x073c8a225c8cf9d3f9157f5c1a1dbe02407f5720"
+  },
+  "sale_state": {
+    "owner": "0xe3dfc9730829e4b2a4513f42545ea0f0270a988a",
+    "treasury": "0x19e658e1bbd8ebaede4d04694e34897faeae7698",
+    "keeper": "0xe828bb0c177800d5aa938c33c6ef54a4d44a0879"
+  },
+  "bsc_transfers": [
+    {
+      "id": "deposit",
+      "title": "100 USDT paid to the dedicated deposit address",
+      "tx": "0xad2e80c67266691c4262ca1a5d2dee3fee4ca72697a812d23334629d6d05da6a",
+      "transfers": [
+        [
+          "0x4c076b120d67dbce36aee45d0f5159797e88585a",
+          "0x9CD4839CAEB63bdb9147A85b1602dC273D74e77D",
+          100
+        ]
+      ],
+      "tehran": "2026-11-17 21:37"
+    },
+    {
+      "id": "sweep",
+      "title": "Deposit address swept: 95 to collection wallet, 5 to referrer",
+      "tx": "0x5f58983777102e9cd3cb88c496ca3379434d39bff25ccc91caf60c307622a0a9",
+      "to": "0xBe03104753e158e414775D5f183E9B92601A0d28",
+      "block": 134165060,
+      "transfers": [
+        [
+          "0x9CD4839CAEB63bdb9147A85b1602dC273D74e77D",
+          "0xe3dfc9730829e4b2a4513f42545ea0f0270a988a",
+          95
+        ],
+        [
+          "0x9CD4839CAEB63bdb9147A85b1602dC273D74e77D",
+          "0x3202dff724695c14c974d9d911bbabc080c81ea2",
+          5
+        ]
+      ],
+      "tehran": "2026-11-17 21:39"
+    },
+    {
+      "id": "A1",
+      "title": "Path A: collection wallet -> intermediate",
+      "tx": "0x799ee9bf7c79aac9db674646e8c778f14ea3e62d116e7d3383079b29630ced4c",
+      "transfers": [
+        [
+          "0xe3dfc9730829e4b2a4513f42545ea0f0270a988a",
+          "0x51256a3964fd2ce4297a69d9cee3e686d4adfa05",
+          30033
+        ]
+      ]
+    },
+    {
+      "id": "A2",
+      "title": "Path A: intermediate -> bridge feeder A",
+      "tx": "0x11a51a274ef71c095aa2751fd8da1ca415d5ab22aa887c7e991a51c6443654db",
+      "transfers": [
+        [
+          "0x51256a3964fd2ce4297a69d9cee3e686d4adfa05",
+          "0x2a6c36539336837630ea97084602d0c734b91eaf",
+          20035.00002102
+        ]
+      ]
+    },
+    {
+      "id": "A3",
+      "title": "Path A: feeder A -> NEAR Intents bridge (20,035 USDT)",
+      "tx": "0xc9c7abfb6514b05d4d5c482aadd2541a269429abf4595552ef7fd76c3029d537",
+      "transfers": [
+        [
+          "0x2a6c36539336837630ea97084602d0c734b91eaf",
+          "0x073c8a225c8cf9d3f9157f5c1a1dbe02407f5720",
+          20035.00002102
+        ]
+      ],
+      "tehran": "2026-11-18 17:31"
+    },
+    {
+      "id": "B1",
+      "title": "Path B: collection wallet -> intermediate",
+      "tx": "0x1b867995f804f6594813f2dc97857b9db14efced0396eee238d2a94cda1fadcd",
+      "transfers": [
+        [
+          "0xe3dfc9730829e4b2a4513f42545ea0f0270a988a",
+          "0x3f5c624bd1f1d2755ba640170c32f8f8840c02bc",
+          50050
+        ]
+      ]
+    },
+    {
+      "id": "B2",
+      "title": "Path B: intermediate -> bridge feeder B",
+      "tx": "0x6d1f6c3be2e3c59fde3db01eae48a42186663ca6cbc9732b43bf6c16c85196c4",
+      "transfers": [
+        [
+          "0x3f5c624bd1f1d2755ba640170c32f8f8840c02bc",
+          "0x03a0f78458a6693c2aacbad4484fb95a541576f8",
+          20000
+        ]
+      ]
+    },
+    {
+      "id": "B3",
+      "title": "Path B: feeder B -> NEAR Intents bridge (20,000 USDT)",
+      "tx": "0xce264d12de7e4705af23bc2e0d8a0f445e9305a9c3409f272d543b8ceae911dc",
+      "transfers": [
+        [
+          "0x03a0f78458a6693c2aacbad4484fb95a541576f8",
+          "0x073c8a225c8cf9d3f9157f5c1a1dbe02407f5720",
+          20000
+        ]
+      ],
+      "tehran": "2026-11-20 12:37"
+    },
+    {
+      "id": "C1",
+      "title": "Path C (probable): collection wallet -> intermediate",
+      "tx": "0xd9dadd698518a6a95dcf8af0f8490e11475b23caf5482ed47799554740443243",
+      "transfers": [
+        [
+          "0xe3dfc9730829e4b2a4513f42545ea0f0270a988a",
+          "0xfdf2a775cbbfe0f00aa13d3d12b40473c17cb2d1",
+          30050
+        ]
+      ]
+    },
+    {
+      "id": "C2",
+      "title": "Path C (probable): intermediate -> feeder C",
+      "tx": "0xde7fa875fcd25ad25cd60009aa5882142cbcc8c5d00e2c47ff9f95f5c423028f",
+      "transfers": [
+        [
+          "0xfdf2a775cbbfe0f00aa13d3d12b40473c17cb2d1",
+          "0x5b6a945da31482f845ae2f9bc5c50dd0c35a53fd",
+          30050
+        ]
+      ]
+    }
+  ],
+  "bsc_approvals": [
+    {
+      "id": "C3",
+      "title": "Path C (probable): feeder C gives the bridge an unlimited USDT approval",
+      "tx": "0xcf00b63e82d777d5c10c8298353fb253a54bef8878b5e2104e4e125bf737c50d",
+      "owner": "0x5b6a945da31482f845ae2f9bc5c50dd0c35a53fd",
+      "spender": "0x073c8a225c8cf9d3f9157f5c1a1dbe02407f5720",
+      "unlimited": true
+    }
+  ],
+  "bsc_balances_now": [
+    {
+      "id": "collection_empty",
+      "title": "Collection wallet is (almost) empty now",
+      "address": "0xe3dfc9730829e4b2a4513f42545ea0f0270a988a",
+      "max_usdt": 1
+    }
+  ],
+  "archive_only": [
+    {
+      "id": "collection_balance",
+      "title": "Collection wallet balance went 101,965.98 -> 102,060.98 USDT across the sweep block",
+      "address": "0xe3dfc9730829e4b2a4513f42545ea0f0270a988a",
+      "block": 134165060,
+      "before": 101965.98,
+      "after": 102060.98
+    }
+  ],
+  "xrp_payments": [
+    {
+      "id": "swapA",
+      "title": "Conversion A output: ~20,054 XRP (SwapKit/NEAR Intents payout account)",
+      "hash": "D09B7580724E84025DF4B023E94226E69ABCDF9A7B5997BCEBE3178556C1E5B7",
+      "src": "r9R8jciZBYGq32DxxQrBPi5ysZm67iQitH",
+      "dst": "rwYQV4MWSDs141bzKGNdybjWniXJbMH9tS",
+      "xrp": 20053.644291
+    },
+    {
+      "id": "swapB",
+      "title": "Conversion B output: ~20,693 XRP",
+      "hash": "CF2BDA3675D9EC013A3DC4DE9F1FB58E4176403A0EDA6EDE048A2B1DE77D1486",
+      "src": "r9R8jciZBYGq32DxxQrBPi5ysZm67iQitH",
+      "dst": "rUwHKjDe4zp6UjJh9MhW3TGVG9q21wpQWe",
+      "xrp": 20693.03244
+    },
+    {
+      "id": "swapC",
+      "title": "Conversion C output (probable): ~33,102 XRP",
+      "hash": "7C82B4F85EE3BB5F9C548ABC0E83A7E8087B0EE61E4061276A33AC6C40414034",
+      "src": "r9R8jciZBYGq32DxxQrBPi5ysZm67iQitH",
+      "dst": "r4ACandzedB2YvdTC9aMHU6P7kzveZdqc",
+      "xrp": 33101.719015
+    },
+    {
+      "id": "B-cobo",
+      "title": "B: 7,759 XRP to intermediate before Cobo",
+      "hash": "45D5649F4665631E4E0CBD8BFC1163DD874E71A017FCFD8E306A653A94BF47CF",
+      "src": "rUwHKjDe4zp6UjJh9MhW3TGVG9q21wpQWe",
+      "dst": "rwgakxkjDiC8kT8nZCF6c476neHShAMc2t",
+      "xrp": 7758.957716
+    },
+    {
+      "id": "B-mexc",
+      "title": "B: 6,478 XRP to MEXC-linked wallet",
+      "hash": "B29CE5C3E077B0F9DA7866908A2A65D9746EBDCDE77F54592AA0B75005EF9DC8",
+      "src": "rUwHKjDe4zp6UjJh9MhW3TGVG9q21wpQWe",
+      "dst": "rG6VgPpL3my4rPKHttif519A3eoiLg3s84",
+      "xrp": 6477.705294
+    },
+    {
+      "id": "B-agg",
+      "title": "B: 6,455 XRP to aggregator",
+      "hash": "44619DAEB7495772873115AFF35EB09B9E5BFA68C51334EDDD8407FFE7032A18",
+      "src": "rUwHKjDe4zp6UjJh9MhW3TGVG9q21wpQWe",
+      "dst": "r3GYL71fbyLTnyCvgCfioXY4ut6DMCupLf",
+      "xrp": 6455.36939
+    },
+    {
+      "id": "C-dist",
+      "title": "C: 33,101 XRP to distributor",
+      "hash": "93C65C6AA4B6B14276C409371BEAFD31F14204A3DA6F2EC8EBEFBAEC23BA0862",
+      "src": "r4ACandzedB2YvdTC9aMHU6P7kzveZdqc",
+      "dst": "rMm3uf5NE3i8XSKnVNmMjXgEX66nNpexcb",
+      "xrp": 33100.719005
+    },
+    {
+      "id": "dist-mexc1",
+      "title": "Distributor -> MEXC-linked wallet",
+      "hash": "97B7F3E907BF4AFE5C167D0170BBFAC80E702E61A2563C29AD073EB87511F3C0",
+      "src": "rMm3uf5NE3i8XSKnVNmMjXgEX66nNpexcb",
+      "dst": "rG6VgPpL3my4rPKHttif519A3eoiLg3s84",
+      "xrp": 44690.715945
+    },
+    {
+      "id": "dist-mexc2",
+      "title": "Distributor -> MEXC-linked wallet",
+      "hash": "7AB691A97FBECEC77BA159D511A1D470606E34E33EA2E221E25827C328DBC520",
+      "src": "rMm3uf5NE3i8XSKnVNmMjXgEX66nNpexcb",
+      "dst": "rG6VgPpL3my4rPKHttif519A3eoiLg3s84",
+      "xrp": 1798.005736
+    },
+    {
+      "id": "dist-agg",
+      "title": "Distributor -> aggregator",
+      "hash": "C613B9915B47EC95FA44CE7838E79F571F770C08E8562377365EE20F9ECDFE4F",
+      "src": "rMm3uf5NE3i8XSKnVNmMjXgEX66nNpexcb",
+      "dst": "r3GYL71fbyLTnyCvgCfioXY4ut6DMCupLf",
+      "xrp": 44331.245191
+    },
+    {
+      "id": "dist-cobo",
+      "title": "Distributor -> intermediate before Cobo",
+      "hash": "E03757A74D0A3F33B4CFE829951A7BF7A87915345CFE803D904C2308558B41D6",
+      "src": "rMm3uf5NE3i8XSKnVNmMjXgEX66nNpexcb",
+      "dst": "ragGmCVaDDcHprti45vcDKPAMngVGm5125",
+      "xrp": 23391.341712
+    },
+    {
+      "id": "A-1",
+      "title": "A: recipient -> intermediate",
+      "hash": "EE49D56BAA3571CFE3472FB301EE6A6E3BF6556993F6163EA4FCC2197A1EFBA4",
+      "src": "rwYQV4MWSDs141bzKGNdybjWniXJbMH9tS",
+      "dst": "rDvrxQrLnyNKxhtpkecYASQEWY13xXi1uy",
+      "xrp": 26440
+    },
+    {
+      "id": "A-2",
+      "title": "A: recipient -> intermediate",
+      "hash": "4DDB097405B35E1F5DDC3CD31DCFC9BA29C6CA97B4A71738CBDA80E2C6A25BE5",
+      "src": "rwYQV4MWSDs141bzKGNdybjWniXJbMH9tS",
+      "dst": "rDvrxQrLnyNKxhtpkecYASQEWY13xXi1uy",
+      "xrp": 662.680957
+    },
+    {
+      "id": "A-3",
+      "title": "A: recipient -> intermediate",
+      "hash": "AE4B7FBF0F7692CE74E9A2EA31A93BB8E4236218972FE98FB41071DC973391F4",
+      "src": "rwYQV4MWSDs141bzKGNdybjWniXJbMH9tS",
+      "dst": "rUzGSuPaKDk4BAE3McGhK9ZVfNqRceufc6",
+      "xrp": 32947.643531
+    },
+    {
+      "id": "hold",
+      "title": "Aggregator -> holding wallet (103,214 XRP)",
+      "hash": "4134A4E8F4DA289D9CC7E29D65B45CAD7FDAB7FB486A77BC4C61103D3848CFDD",
+      "src": "r3GYL71fbyLTnyCvgCfioXY4ut6DMCupLf",
+      "dst": "rPYGDMGhEXop35oJPcsMkM8tDrzLHCEtJn",
+      "xrp": 103213.964004
+    },
+    {
+      "id": "mexc-activation",
+      "title": "MEXC-linked wallet was activated by MEXC's labelled account",
+      "hash": "F169E5EF9853BF1225FEA65D1B703541D2A6416B928D2E22C0258C2219B69EA3",
+      "src": "rs2dgzYeqYqsk8bvkQR5YPyqsXYcA24MP2",
+      "dst": "rG6VgPpL3my4rPKHttif519A3eoiLg3s84"
+    },
+    {
+      "id": "hold-to-cobo",
+      "title": "Holding wallet forwarded ~103,213 XRP to Cobo, tag 3140594156 (2026-11-23)",
+      "hash": "DBB4EE2C251147A1A35CFE0FD107F890A1E6C12B98ED32F3D8DF272A74FF6BEF",
+      "src": "rPYGDMGhEXop35oJPcsMkM8tDrzLHCEtJn",
+      "dst": "rBWpYJhuJWBPAkzJ4kYQqHShSkkF3rgeD",
+      "xrp": 103212.963994,
+      "tag": 3140594156
+    }
+  ],
+  "cobo": {
+    "account": "rBWpYJhuJWBPAkzJ4kYQqHShSkkF3rgeD",
+    "deposits": [
+      {
+        "hash": "21620C240923859BB8F0D82FE2922F346C477F5EE2B564306324A913839C24D4",
+        "src": "rDvrxQrLnyNKxhtpkecYASQEWY13xXi1uy",
+        "tag": 3140594156,
+        "xrp": 10000
+      },
+      {
+        "hash": "A20D9835473DE9AD8C744C19ACD1635C64F1AE8D51101FEADEA21044B047FF1A",
+        "src": "rDvrxQrLnyNKxhtpkecYASQEWY13xXi1uy",
+        "tag": 3140594156,
+        "xrp": 85350.253378
+      },
+      {
+        "hash": "1771D975F8BDCFDD2DCF6765B8704C8AC4DD2BE23B09A064FACFA00AB36E5041",
+        "src": "rUzGSuPaKDk4BAE3McGhK9ZVfNqRceufc6",
+        "tag": 1276440635,
+        "xrp": 1000
+      },
+      {
+        "hash": "664D141B8C0E03F56B67C895A968AC5A6F991659029AF6005257026CE0BFCDB0",
+        "src": "rUzGSuPaKDk4BAE3McGhK9ZVfNqRceufc6",
+        "tag": 1276440635,
+        "xrp": 30000
+      },
+      {
+        "hash": "F59164C6A472C974DBDBF36303BA49336EB0F26B2339D85EB8BAA01E797462B3",
+        "src": "rUzGSuPaKDk4BAE3McGhK9ZVfNqRceufc6",
+        "tag": 1276440635,
+        "xrp": 17420
+      },
+      {
+        "hash": "E905939C7C6EAAC9B97A0E166B2BB49F5FD4BB02957EEC5BDA8A574A752144DF",
+        "src": "rwgakxkjDiC8kT8nZCF6c476neHShAMc2t",
+        "tag": 2672388339,
+        "xrp": 1000
+      },
+      {
+        "hash": "0593713593821BC05F5ED8354BDEA2FCC0BDDE3338CF29A876B83B546E0EA646",
+        "src": "rwgakxkjDiC8kT8nZCF6c476neHShAMc2t",
+        "tag": 2672388339,
+        "xrp": 6757.957687
+      },
+      {
+        "hash": "B066E529B8393652CCFCDEFB72894800D2E5BAC8E7D945EB24AADAF77795159D",
+        "src": "ragGmCVaDDcHprti45vcDKPAMngVGm5125",
+        "tag": 2979444628,
+        "xrp": 23390.341702
+      }
+    ],
+    "tag_totals": {
+      "3140594156": 95350,
+      "1276440635": 48420,
+      "2672388339": 7758,
+      "2979444628": 23390
+    },
+    "total_approx": 175000,
+    "note": "tag_totals/total_approx cover deposits up to 2026-11-22 as published on the site; the 2026-11-23 forward of ~103,213 XRP (hold-to-cobo) is listed separately."
+  },
+  "xrpscan_labels": {
+    "rBWpYJhuJWBPAkzJ4kYQqHShSkkF3rgeD": "Cobo Custody",
+    "rs2dgzYeqYqsk8bvkQR5YPyqsXYcA24MP2": "MEXC"
+  }
+}
