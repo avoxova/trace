@@ -160,13 +160,16 @@ def run(c, chain, rep):
                 pre = usdt(chain.eth("eth_call", [{"to": U, "data": data}, hex(a["block"] - 1)]))
                 post_ = usdt(chain.eth("eth_call", [{"to": U, "data": data}, hex(a["block"])]))
             except RuntimeError as e:
-                raise RuntimeError("needs an archive BSC node (--bsc-rpc): " + str(e)[:80])
+                raise RuntimeError(
+                    "Historical balance not verified. RPC request failed: " + str(e)
+                    + ". Retry later or use --bsc-rpc with a provider supporting historical state."
+                ) from e
             return abs(pre - a["before"]) < 0.01 and abs(post_ - a["after"]) < 0.01, f"{pre:.2f} -> {post_:.2f}"
         try:
             ok, d = f()
             rep.add(a["id"], a["title"], "PASS" if ok else "FAIL", d)
         except Exception as e:
-            rep.add(a["id"], a["title"], "SKIP", str(e)[:140])
+            rep.add(a["id"], a["title"], "SKIP", str(e))
 
     # --- XRPL payments
     def xpay(cid, title, p):
