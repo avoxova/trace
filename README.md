@@ -1,16 +1,32 @@
 # trace — independent on-chain verification
 
+<p align="center">
+  <b>📄 Public report:</b> <a href="https://trace.avoxova.com">trace.avoxova.com</a> (فارسی) · <a href="https://trace.avoxova.com/en">trace.avoxova.com/en</a> (English)
+</p>
+
 **[فارسی](#فارسی) · [English](#english)**
 
 ---
 
 ## English
 
-This repository lets anyone re-check, **directly against public blockchain nodes**, every on-chain figure published at **[trace.avoxova.com](https://trace.avoxova.com)**.
+### What this is
 
-That site follows a 100 USDT (BEP-20) payment made in November 2026 (Aban 1405) on the domain **dotomarket1.com**, which presented itself as a sale of the DOTO token. The tracing was done independently by the AVOXOVA AI agent.
+**[trace.avoxova.com](https://trace.avoxova.com)** is a public report about a phishing case on the domain **dotomarket1.com**. In November 2026 (Aban 1405) that domain collected payments under the title of a DOTO token sale. The AVOXOVA AI agent independently traced the money from one 100 USDT (BEP-20) payment. The trail runs on BNB Smart Chain, through a cross-chain bridge, and on the XRP Ledger, and ends at the services where the funds arrived.
+
+**This repository is the open, reproducible side of that report.** Every on-chain figure on the site is listed in [`claims.json`](claims.json), and [`verify.py`](verify.py) re-checks each one live against public blockchain nodes. You do not need to trust us; you can run it yourself.
 
 > This case concerns **only the domain dotomarket1.com**. It makes no claim about the DOTO token itself, its issuer, or any other website. Listing an address here is a statement about public blockchain data, not an accusation against its holder. Exchanges, custodians and bridges appear only as *destinations* or *infrastructure*.
+
+### Why it is open: a call to developers
+
+We opened this repository for developers and on-chain analysts who want to:
+
+1. **Audit:** run the checker and tell us if any figure is wrong.
+2. **Complete the trail:** follow the funds further than we did. See the open tasks below.
+3. **Improve the method:** make the checks more robust, add sources, and reduce the parts that rely on inference.
+
+Corrections are welcome even when they go against our own conclusions. Anything confirmed here will also be corrected on the public report.
 
 ### Run it
 
@@ -21,49 +37,58 @@ git clone https://github.com/avoxova/trace.git
 cd trace
 python3 verify.py            # human-readable
 python3 verify.py --json     # machine-readable
+python3 verify.py --bsc-rpc https://your-archive-node   # enables archive-only checks
 ```
 
-The exit code is `0` when nothing fails and `1` when any claim fails.
+The exit code is `0` when nothing fails and `1` when any claim fails. On free public nodes the current result is **48 PASS, 0 FAIL, 1 SKIP** (the skip is archive-only). Timestamps are printed in UTC; the site shows Tehran time (UTC+3:30).
 
 ### What it checks
-
-All claims are listed in [`claims.json`](claims.json). Each one is checked live:
 
 | Chain | What is verified |
 |---|---|
 | BNB Smart Chain | The 100 USDT deposit, and the sweep 2 minutes later (95 USDT to the collection wallet and 5 USDT to a referrer). Every hop of paths A, B and C toward the NEAR Intents bridge, plus the unlimited approval of path C. The sale contract's `owner()` and `treasury()`. The collection wallet's current balance. |
-| XRP Ledger | The three USDT→XRP conversion payouts. Every intermediate hop. All 8 deposits into Cobo Custody across 4 destination tags, with per-tag totals of about 175,000 XRP. The payments into the MEXC-linked wallet and that wallet's activation by MEXC's labelled account. The holding wallet. |
+| XRP Ledger | The three USDT→XRP conversion payouts and every intermediate hop. All deposits into Cobo Custody across 4 destination tags. The payments into the MEXC-linked wallet and that wallet's activation by MEXC's labelled account. The holding wallet and its later forward to Cobo. |
 | XRPScan | The public labels "Cobo Custody" and "MEXC". |
 
-### Known limits — please help
+### Open tasks: help complete the trail
 
-- **Archive-only:** the collection wallet's balance right before and after the sweep (101,965.98 → 102,060.98 USDT) needs an archive BSC node. Free public nodes only keep recent state. If you have one, run:
-  `python3 verify.py --bsc-rpc https://your-archive-node`
-- **Not yet scripted:** the site's aggregate statistics (number of senders and deposits into the collection wallet) need full log indexing. Free public RPCs rate-limit this. A PR that adds a robust and reproducible counter is very welcome.
-- **Path C is marked *probable*:** its link to the bridge payout is inferred from an unlimited approval, not from a direct transfer.
-- **Timestamps** are printed in UTC. The site shows Tehran time (UTC+3:30).
+| # | Task | Why it is open |
+|---|---|---|
+| 1 | Verify the collection wallet's balance just before and after the sweep (101,965.98 → 102,060.98 USDT). | Needs an archive BSC node. |
+| 2 | Reproducibly count senders and deposits into the collection wallet `0xe3df…988a` during 26–30 Aban 1405. | Free RPCs and explorers rate-limit full log scans. |
+| 3 | Map the rest of the collection wallet's outflows, beyond paths A, B and C. | The site traces only the funds linked to one payment. |
+| 4 | Confirm or reject the **probable** path C, which links feeder `0x5b6a…53fd` to the third XRP payout. | It is currently inferred from an unlimited approval, not from a direct transfer. |
+| 5 | Follow the MEXC-linked wallet and the aggregator `r3GY…upLf` further. | Not yet traced. |
 
 ### Contributing
 
-Open an issue or a pull request if any of these applies:
-- a check fails,
-- a figure is wrong,
-- you can verify the archive-only items,
-- you can improve methodology.
+- Open an **issue** for a wrong figure, a failing check, or a new lead. Include transaction hashes, so it can be verified.
+- Open a **pull request** to add a claim to `claims.json` together with its check in `verify.py`. Every new claim must be verifiable from public chain data with this script.
+- Please do **not** post personal data, guesses about identities, or accusations. Keep to on-chain facts.
 
-Please keep contributions to verifiable on-chain facts. Do not post personal data or accusations.
-
-**Not legal advice.** This is a technical record of public data. Victims should file a complaint with the judicial authority and the cyber police ([policefata.ir](https://policefata.ir)).
+**Not legal advice.** This is a technical record of public data. Victims should first file a complaint with the judicial authority, then with the cyber police ([policefata.ir](https://policefata.ir)).
 
 ---
 
 ## فارسی
 
-این مخزن به هر کسی امکان می‌دهد تمام داده‌های بلاکچینی منتشرشده در **[trace.avoxova.com](https://trace.avoxova.com)** را **مستقیم از نودهای عمومی بلاکچین** دوباره بررسی کند.
+### این مخزن چیست
 
-موضوع آن سایت ردیابی یک پرداخت ۱۰۰ تتری (BEP-20) است. این پرداخت در آبان ۱۴۰۵ در دامنه‌ی **dotomarket1.com** انجام شد؛ دامنه‌ای که با عنوان فروش ارز DOTO فعالیت می‌کرد. ردیابی به‌صورت مستقل توسط ایجنت هوش مصنوعی AVOXOVA انجام شده است.
+**[trace.avoxova.com](https://trace.avoxova.com)** گزارش عمومی یک پرونده‌ی فیشینگ در دامنه‌ی **dotomarket1.com** است. در آبان ۱۴۰۵ در این دامنه با عنوان فروش ارز DOTO پول جمع‌آوری شد. ایجنت هوشمند آوکسوا مسیر پول یک واریز ۱۰۰ تتری (BEP-20) را به‌صورت مستقل دنبال کرده است. این مسیر از شبکه‌ی بی‌ان‌بی (BSC) شروع می‌شود، از یک پل بین‌زنجیره‌ای می‌گذرد، به شبکه‌ی ریپل می‌رسد و در سرویس‌هایی تمام می‌شود که پول به آن‌ها رسیده است.
+
+**این مخزن بخش باز و قابل‌بازتولید همان گزارش است.** هر عدد بلاکچینی که در سایت آمده، این‌جا در [`claims.json`](claims.json) ثبت شده است. کد [`verify.py`](verify.py) همه‌ی آن‌ها را مستقیم از نودهای عمومی بلاکچین دوباره بررسی می‌کند. لازم نیست به ما اعتماد کنید؛ خودتان اجرا کنید.
 
 > این پرونده **فقط به دامنه‌ی dotomarket1.com** مربوط است و درباره‌ی خود توکن DOTO، صادرکننده‌ی آن یا هیچ سایت دیگری ادعایی ندارد. آمدن یک آدرس در این مخزن، بیان داده‌ی عمومی بلاکچین است و اتهامی به دارنده‌ی آن نیست. صرافی‌ها، امانت‌دارها و پل‌ها فقط به‌عنوان *مقصد* یا *زیرساخت* ذکر شده‌اند.
+
+### چرا این مخزن را باز کردیم: دعوت از برنامه‌نویس‌ها
+
+این مخزن برای برنامه‌نویس‌ها و تحلیلگران بلاکچین راه‌اندازی شده است تا بتوانند:
+
+1. **بررسی کنند:** کد را اجرا کنند و اگر عددی نادرست بود، اطلاع بدهند.
+2. **مسیر را کامل کنند:** پول را فراتر از جایی که ما رسیدیم دنبال کنند (کارهای باز را در پایین ببینید).
+3. **روش را بهتر کنند:** بررسی‌ها را دقیق‌تر کنند، منبع اضافه کنند و بخش‌های استنباطی را کم کنند.
+
+اصلاحیه‌ها حتی اگر خلاف نتیجه‌گیری ما باشند، پذیرفته می‌شوند. هر اصلاحیه‌ای که این‌جا تأیید شود، در سایت گزارش هم اعمال می‌شود.
 
 ### اجرا
 
@@ -80,6 +105,8 @@ python3 verify.py
 - `FAIL`: رد شد
 - `SKIP`: نیاز به نود آرشیوی دارد
 
+نتیجه‌ی فعلی روی نودهای عمومی رایگان: **۴۸ تأیید، ۰ رد، ۱ مورد نیازمند نود آرشیوی**.
+
 ### چه چیزهایی بررسی می‌شود
 
 **در شبکه‌ی BSC:**
@@ -89,21 +116,25 @@ python3 verify.py
 
 **در شبکه‌ی ریپل:**
 - سه تبدیل تتر به ریپل و همه‌ی گام‌های میانی
-- هشت واریز به Cobo (امانت‌دار دارایی) با چهار تگ و مجموع حدود ۱۷۵ هزار XRP
+- واریزها به Cobo (امانت‌دار دارایی) با چهار تگ
 - واریزها به کیف مرتبط با MEXC
 
-### محدودیت‌ها
+### کارهای باز برای کامل کردن مسیر
 
-- **نیاز به نود آرشیوی:** موجودی کیف جمع‌آوری دقیقاً پیش و پس از جارو، از نودهای رایگان قابل‌بررسی نیست.
-- **هنوز اسکریپت نشده:** آمار کلی (تعداد فرستنده‌ها و واریزها) به ایندکس کامل لاگ‌ها نیاز دارد. نودهای رایگان این کار را محدود می‌کنند و از کمک توسعه‌دهندگان استقبال می‌کنیم.
-- **مسیر ج «احتمالی» است:** پیوند آن با پل از یک مجوز برداشت (approve) استنباط شده، نه از انتقال مستقیم.
+1. بررسی موجودی کیف جمع‌آوری درست پیش و پس از جارو، که به نود آرشیوی BSC نیاز دارد.
+2. شمارش قابل‌بازتولید فرستنده‌ها و واریزهای کیف جمع‌آوری `0xe3df…988a` در ۲۶ تا ۳۰ آبان ۱۴۰۵.
+3. ردیابی بقیه‌ی خروجی‌های کیف جمع‌آوری، فراتر از مسیرهای الف، ب و ج.
+4. تأیید یا رد مسیر «احتمالی» ج. پیوند آن فعلاً از یک مجوز برداشت (approve) استنباط شده است.
+5. دنبال کردن کیف مرتبط با MEXC و کیف تجمیع `r3GY…upLf`.
 
 ### مشارکت
 
-اگر خطایی دیدید یا روش بهتری دارید، issue یا pull request بفرستید. لطفاً فقط داده‌ی قابل‌بازبینی بلاکچین بفرستید و داده‌ی شخصی یا اتهام نفرستید.
+- برای عدد نادرست، بررسی ردشده یا سرنخ تازه، **issue** باز کنید و هش تراکنش را هم بگذارید.
+- ادعای تازه را با **pull request** به `claims.json` اضافه کنید و بررسی آن را هم در `verify.py` بنویسید.
+- لطفاً داده‌ی شخصی، حدس درباره‌ی هویت افراد یا اتهام نفرستید و فقط به داده‌های بلاکچین بسنده کنید.
 
 **این مخزن مشاوره‌ی حقوقی نیست.** مال‌باختگان ابتدا به مرجع قضایی و سپس به پلیس فتا ([policefata.ir](https://policefata.ir)) مراجعه کنند.
 
 ---
 
-[avoxova.com](https://avoxova.com) · [agent.avoxova.com](https://agent.avoxova.com) · [Telegram](https://t.me/avoxova) · [Instagram](https://www.instagram.com/avoxova/)
+**Report / گزارش:** [trace.avoxova.com](https://trace.avoxova.com) · [avoxova.com](https://avoxova.com) · [agent.avoxova.com](https://agent.avoxova.com) · [Telegram](https://t.me/avoxova) · [Instagram](https://www.instagram.com/avoxova/)
