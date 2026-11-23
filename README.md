@@ -66,6 +66,12 @@ The exit code is `0` when nothing fails and `1` when any claim fails. On free pu
 - Open a **pull request** to add a claim to `claims.json` together with its check in `verify.py`. Every new claim must be verifiable from public chain data with this script.
 - Please do **not** post personal data, guesses about identities, or accusations. Keep to on-chain facts.
 
+### Contact
+
+For questions, corrections or leads that do not fit in a public issue, contact us on Telegram: **[@avoxova_support](https://t.me/avoxova_support)**. Updates are announced on the channel **[@avoxova](https://t.me/avoxova)**.
+
+> We never ask for a private key, seed phrase, password or any payment, and we do not offer "fund recovery". Anyone asking for these in our name is not us.
+
 **Not legal advice.** This is a technical record of public data. Victims should first file a complaint with the judicial authority, then with the cyber police ([policefata.ir](https://policefata.ir)).
 
 ---
@@ -135,10 +141,16 @@ python3 verify.py
 - ادعای تازه را با **pull request** به `claims.json` اضافه کنید و بررسی آن را هم در `verify.py` بنویسید.
 - لطفاً داده‌ی شخصی، حدس درباره‌ی هویت افراد یا اتهام نفرستید و فقط به داده‌های بلاکچین بسنده کنید.
 
+### ارتباط با ما
+
+برای پرسش، اعلام خطا یا سرنخی که مناسب issue عمومی نیست، از راه تلگرام با **[@avoxova_support](https://t.me/avoxova_support)** در ارتباط باشید. خبرهای پرونده در کانال **[@avoxova](https://t.me/avoxova)** اعلام می‌شود.
+
+> ما هرگز کلید خصوصی، عبارت بازیابی، رمز عبور یا هیچ وجهی درخواست نمی‌کنیم و خدمات «بازگرداندن وجه» نداریم؛ هر کس به نام ما چنین درخواستی کند، از طرف ما نیست.
+
 **این مخزن مشاوره‌ی حقوقی نیست.** مال‌باختگان ابتدا به مرجع قضایی و سپس به پلیس فتا ([policefata.ir](https://policefata.ir)) مراجعه کنند.
 
 </div>
 
 ---
 
-**Report / گزارش:** [trace.avoxova.com](https://trace.avoxova.com) · [avoxova.com](https://avoxova.com) · [agent.avoxova.com](https://agent.avoxova.com) · [Telegram](https://t.me/avoxova) · [Instagram](https://www.instagram.com/avoxova/)
+**Report / گزارش:** [trace.avoxova.com](https://trace.avoxova.com) · [avoxova.com](https://avoxova.com) · [agent.avoxova.com](https://agent.avoxova.com) · [Telegram](https://t.me/avoxova) · [Support](https://t.me/avoxova_support) · [Instagram](https://www.instagram.com/avoxova/)
